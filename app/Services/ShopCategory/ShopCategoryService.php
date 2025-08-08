@@ -2,10 +2,10 @@
 
 namespace App\Services\ShopCategory;
 
-use App\Services\CommonService;
-use App\Repositories\ShopCategory\ShopCategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Services\CommonService;
 use Illuminate\Support\Facades\DB;
+use App\Repositories\ShopCategory\ShopCategoryRepositoryInterface;
 
 class ShopCategoryService extends CommonService
 {
@@ -16,12 +16,10 @@ class ShopCategoryService extends CommonService
         //
     }
 
-    public function getAllShopCategories(Request $request)
+    public function getAllShopCategories(Request $request): array
     {
         $params = $this->params($request);
-
         $data = $this->shopCategoryRepository->all($params);
-
         unset($params['with'], $params['limit'], $params['offset']);
         $total = $this->shopCategoryRepository->totalCount($params);
 
@@ -83,7 +81,7 @@ class ShopCategoryService extends CommonService
         return true;
     }
 
-    public function deleteShopCategory(string $uuid)
+    public function deleteShopCategory(string $uuid): bool
     {
         $shopCategory = $this->shopCategoryRepository->getDataByUuid($uuid);
 

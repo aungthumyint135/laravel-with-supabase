@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\ShopCategory;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Foundation\Routing\Controller;
 use App\Services\ShopCategory\ShopCategoryService;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
 
 class ShopCategoryController extends Controller
 {
@@ -52,7 +51,7 @@ class ShopCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $uuid)
+    public function show(string $uuid): JsonResponse
     {
         $shopCategory = $this->service->getShopCategoryByUuid($uuid);
 
@@ -74,7 +73,7 @@ class ShopCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $uuid)
+    public function update(Request $request, string $uuid): JsonResponse
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required|string|min:2|max:255',
@@ -96,7 +95,7 @@ class ShopCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $uuid)
+    public function destroy(string $uuid): JsonResponse
     {
         $response = $this->service->deleteShopCategory($uuid);
 

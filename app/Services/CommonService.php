@@ -17,7 +17,7 @@ class CommonService
             array_filter(array_intersect_key($data, array_flip($fillable)), fn ($value) => $value != null);
     }
 
-    public function params(Request $request, array $only = [], array $options = []): array
+    public function params(Request $data, array $only = [], array $options = []): array
     {
         $search = $data['search'] ?? null;
 
